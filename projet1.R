@@ -1,8 +1,8 @@
+#Data file init
 setwd("~/Documents/DataScientist/Module 4/Projet 1")
 hpc <- read.csv2("./data/household_power_consumption.txt")
 library(lubridate)
 
-#sample <- hpc[((hpc$Date=="2/2/2007") | (hpc$Date=="1/2/2007")) ,]
 sample <- subset(hpc,(hpc$Date %in% c("2/2/2007","1/2/2007")))
 sample$DateTime <- strptime(paste(sample$Date, sample$Time),format="%d/%m/%Y %H:%M:%S")
 sample$Global_active_power <- as.numeric(sample$Global_active_power)
@@ -16,11 +16,8 @@ sample$Sub_metering_3 <-as.numeric(as.character(sample$Sub_metering_3))
 #-----
 library(datasets)
 png(filename="plot1.png",width=480,height=480,units="px")
-#with(faithful, {
         hist(sample$Global_active_power,col="red",main = "Global Active Power",
                     xlab="Global active power (kilowatts)")
- #    }     ) ## Create plot on screen device
-
 #dev.copy(png, file = "plot1.png") ## Copy my plot to a PNG file
 dev.off() ## Don't forget to close the PNG device!
 #----
