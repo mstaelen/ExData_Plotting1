@@ -1,3 +1,4 @@
+#Data file init
 if (c("household_power_consumption.txt") %in% dir()) {
         print("we use the current file")
 } else {
@@ -10,9 +11,10 @@ if (c("household_power_consumption.txt") %in% dir()) {
                 stop("Please try again")
         }
 }
-
+#Read file
 hpc <- read.csv2("./household_power_consumption.txt")
 
+#Prepare the data
 sample <- subset(hpc,(hpc$Date %in% c("2/2/2007","1/2/2007")))
 sample$DateTime <- strptime(paste(sample$Date, sample$Time),format="%d/%m/%Y %H:%M:%S")
 sample$Global_active_power <- as.numeric(sample$Global_active_power)
